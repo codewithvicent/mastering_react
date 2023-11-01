@@ -1,0 +1,21 @@
+.main_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #aaa;
+}
+
+.inner_wrapper {
+  background-color: white;
+  width: 50%;
+  height: 60%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.inner_wrapper button {
+  background-color: teal;
+  color: white;
+}

@@ -1,0 +1,14 @@
+.main_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #aaa;
+}
+
+.inner_wrapper {
+  width: 50%;
+  height: 50%;
+  background-color: white;
+}
