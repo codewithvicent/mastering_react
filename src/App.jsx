@@ -1,61 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./components/main.css";
+import axios from "axios";
 function App() {
   // REACT HOOKS ***************
-  // useState
+  // useEffect
+  const [state, setState] = useState(0);
 
-  //  const [state, setState] = useState(initialState)
+  useEffect(() => {
+    console.log("useEffect hook");
+  }, []);
 
-  // number
-  const [count, setCount] = useState(0);
+  // dom manipulation
+  useEffect(() => {
+    document.title = "Test Title";
+  }, []);
 
-  // string
-  const [name, setName] = useState("");
+  // data fetching
 
-  // Array
-  const [names, setNames] = useState(["John", "Jane", "Mavin", "Abeine"]);
+  // const [posts, setPosts] = useState([]);
+  const [singlepost, setSinglePost] = useState({});
+  useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const res = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts/1"
+        );
+        console.log(res.data);
+        setSinglePost(res.data);
+        // setPosts(res.data);
+      } catch (err) {
+        console.log(first);
+      }
+    };
+    getPosts();
+  }, []);
 
-  // object
-  const [employee, setEmployee] = useState({
-    empName: "John",
-    empage: 12,
-    empId: 56,
-  });
+  // subscription
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("Time out completed!");
+    }, 3000);
 
-  // boolean
-  const [isEmployee, setIsEmplyee] = useState(false);
-
-  const handleIncrement = () => {
-    setCount(count - 5);
-  };
-
-  // rveal name handler
-  const handleRevealName = () => {
-    setIsEmplyee(!isEmployee);
-  };
+    return () => {
+      clearTimeout(timer);
+      console.log("Timer has been cleared on mount!");
+    };
+  }, []);
 
   return (
     <div className="main_wrapper">
       <div className="inner_wrapper">
-        <div>count is {count}</div>
-        <button onClick={handleIncrement}>Increment Count</button>
-
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <button onClick={handleRevealName}>Reveal Name</button>
-
-        {isEmployee && <div>{name}</div>}
-
-        {names.map((name) => (
-          <div>{name}</div>
-        ))}
-
         <div>
-          {employee.empName} - {employee.empage} - {employee.empId}
+          {singlepost.body}
+          {/* {posts.map((post) => (
+            <p>{post.title}</p>
+          ))} */}
         </div>
       </div>
     </div>
